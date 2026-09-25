@@ -89,6 +89,13 @@ Valores manuais principais:
 
 O desenvolvimento algébrico completo e a tabela de `-45°` a `45°` estão em [`calculo_manual.md`](calculo_manual.md) e no relatório em PDF.
 
+## Cálculos manuais digitados em LaTeX
+
+- Código-fonte LaTeX: [`calculos_manuais_atividade_3A.tex`](calculos_manuais_atividade_3A.tex)
+- Documento compilado: [`calculos_manuais_atividade_3A.pdf`](calculos_manuais_atividade_3A.pdf)
+
+O documento apresenta separadamente as cinco fases da inferência, a tabela completa do CDA, os somatórios `Σμ=8,40` e `Σμθ=43,00`, o ângulo manual `5,119048°` e a comparação com a simulação `4,828622°`.
+
 ![Resultado da simulação](prints/resultado_simulacao.png)
 
 ## Estrutura
@@ -97,6 +104,8 @@ O desenvolvimento algébrico completo e a tabela de `-45°` a `45°` estão em [
 fuzzy-robotica-desvio-obstaculos/
 ├── README.md
 ├── calculo_manual.md
+├── calculos_manuais_atividade_3A.tex
+├── calculos_manuais_atividade_3A.pdf
 ├── fuzzy_robotica.sce
 ├── fuzzy_robotica.fls
 ├── relatorio_atividade_3A.tex
