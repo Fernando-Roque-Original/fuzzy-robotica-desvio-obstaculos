@@ -1,0 +1,8 @@
+ATIVIDADE 3A - CONTROLE FUZZY PARA ROBOTICA MOVEL
+
+Entrada d = 10.00 cm
+Entrada a = -10.00 cm
+Angulo pelo sciFLT = 4.828622 graus
+Angulo manual (passo de 5 graus) = 5.119048 graus
+Diferenca = -0.290426 graus
+Acao = VIRAR PARA A DIREITA
