@@ -47,17 +47,17 @@ O trabalho utiliza somente o Scilab como ambiente de implementação e simulaç�
 Pasta completa do projeto:
 
 ```text
-C:\Users\ferna\Desktop\01 - Faculdade\AUTOMACAO
+C:\Users\ferna\Desktop\01 - Faculdade\Faculdade\10 semestre\AUTOMAÇAO
 ```
 
 Arquivos e pastas principais:
 
 ```text
-C:\Users\ferna\Desktop\01 - Faculdade\AUTOMACAO\fuzzy_robotica.sce
-C:\Users\ferna\Desktop\01 - Faculdade\AUTOMACAO\fuzzy_robotica.fls
-C:\Users\ferna\Desktop\01 - Faculdade\AUTOMACAO\relatorio_atividade_3A.tex
-C:\Users\ferna\Desktop\01 - Faculdade\AUTOMACAO\relatorio_atividade_3A.pdf
-C:\Users\ferna\Desktop\01 - Faculdade\AUTOMACAO\prints
+C:\Users\ferna\Desktop\01 - Faculdade\Faculdade\10 semestre\AUTOMAÇAO\fuzzy_robotica.sce
+C:\Users\ferna\Desktop\01 - Faculdade\Faculdade\10 semestre\AUTOMAÇAO\fuzzy_robotica.fls
+C:\Users\ferna\Desktop\01 - Faculdade\Faculdade\10 semestre\AUTOMAÇAO\relatorio_atividade_3A.tex
+C:\Users\ferna\Desktop\01 - Faculdade\Faculdade\10 semestre\AUTOMAÇAO\relatorio_atividade_3A.pdf
+C:\Users\ferna\Desktop\01 - Faculdade\Faculdade\10 semestre\AUTOMAÇAO\prints
 ```
 
 ## Como executar
@@ -70,7 +70,7 @@ C:\Users\ferna\Desktop\01 - Faculdade\AUTOMACAO\prints
 Também é possível executar no console:
 
 ```scilab
-cd("C:/Users/ferna/Desktop/01 - Faculdade/AUTOMACAO")
+cd("C:/Users/ferna/Desktop/01 - Faculdade/Faculdade/10 semestre/AUTOMAÇAO")
 exec("fuzzy_robotica.sce", -1)
 ```
 
@@ -79,6 +79,15 @@ exec("fuzzy_robotica.sce", -1)
 Para `d = 10 cm` e `a = -10 cm`, são ativadas as regras Perto/Negativa e Perto/Zero. O sciFLT calcula aproximadamente `4,8286°`. Como o ângulo é positivo, o robô deve virar para a direita.
 
 O cálculo manual, discretizado em passos de 5 graus, resulta em aproximadamente `5,1190°`. O valor do software pode diferir levemente porque usa 1001 pontos na defuzzificação.
+
+Valores manuais principais:
+
+- Fuzzificação: `μPerto(10)=1`, `μNegativa(-10)=0,4` e `μZero(-10)=0,6`.
+- Forças das duas regras ativadas: `α1=0,4` e `α2=0,6`.
+- Memorial do CDA: `Σμ=8,40` e `Σμθ=43,00`.
+- Resultado: `CDA=43,00/8,40=5,1190°`, portanto virar para a direita.
+
+O desenvolvimento algébrico completo e a tabela de `-45°` a `45°` estão em [`calculo_manual.md`](calculo_manual.md) e no relatório em PDF.
 
 ![Resultado da simulação](prints/resultado_simulacao.png)
 

@@ -50,7 +50,8 @@
   showstringspaces=false,
   numbers=left,
   numberstyle=\tiny\color{gray},
-  tabsize=4
+  tabsize=4,
+  literate={Ç}{{\c{C}}}1
 }
 
 \begin{document}
@@ -143,22 +144,33 @@ Todas as regras utilizam o conectivo E. A base completa possui nove regras.
 
 \subsection{Fase 1 -- Fuzzificação}
 
-Para a distância frontal:
+Para a distância frontal, $d=10$ cm está no trecho constante da função Perto
+($0\leq d\leq 15$), antes do suporte da função Média ($d<15$) e antes do
+suporte da função Longe ($d<60$). Portanto:
 \[
-\mu_{\text{Perto}}(10)=1,\qquad
-\mu_{\text{Média}}(10)=0,\qquad
+\mu_{\text{Perto}}(10)=1,
+\qquad
+\mu_{\text{Média}}(10)=0,
+\qquad
 \mu_{\text{Longe}}(10)=0.
 \]
 
-Para a assimetria lateral:
+Para a assimetria lateral, $a=-10$ cm pertence simultaneamente aos trechos
+lineares de Negativa e Zero. Usando as equações das retas indicadas no gráfico:
 \[
-\mu_{\text{Negativa}}(-10)=\frac{0-(-10)}{25}=0{,}4,
+\mu_{\text{Negativa}}(-10)
+=\frac{0-a}{0-(-25)}
+=\frac{0-(-10)}{25}
+=\frac{10}{25}=0{,}4,
 \]
 \[
-\mu_{\text{Zero}}(-10)=\frac{-10-(-25)}{25}=0{,}6,
-\qquad
-\mu_{\text{Positiva}}(-10)=0.
+\mu_{\text{Zero}}(-10)
+=\frac{a-(-25)}{0-(-25)}
+=\frac{-10+25}{25}
+=\frac{15}{25}=0{,}6,
 \]
+e $\mu_{\text{Positiva}}(-10)=0$, pois a função Positiva só possui suporte
+a partir de $a=0$.
 
 \subsection{Fase 2 -- Regras ativadas}
 
@@ -192,7 +204,10 @@ As saídas truncadas são combinadas pelo máximo:
 
 \subsection{Fase 5 -- Defuzzificação}
 
-O universo de saída foi discretizado em passos de $5^\circ$.
+O universo de saída foi discretizado em passos de $5^\circ$, exatamente como
+solicitado. Em cada ponto calcula-se primeiro
+$\mu_{agregada}(\theta)$ e depois o produto
+$\mu_{agregada}(\theta)\theta$.
 
 \begin{table}[H]
 \centering
@@ -215,9 +230,36 @@ $\theta$ & $\mu$ & $\mu\theta$ & $\theta$ & $\mu$ & $\mu\theta$ \\
 \end{tabular}
 \end{table}
 
-Assim, $\sum\mu=8{,}4$ e $\sum\mu\theta=43$. Logo:
+\subsubsection*{Memorial de cálculo manual do CDA}
+
+No lado esquerdo, existem oito amostras com pertinência $0{,}40$ entre
+$-45^\circ$ e $-10^\circ$, além da amostra $-5^\circ$ com pertinência
+$0{,}25$. No lado direito, as pertinências são $0{,}25$ em $5^\circ$,
+$0{,}50$ em $10^\circ$ e $0{,}60$ nas sete amostras de $15^\circ$ a
+$45^\circ$. Assim, o denominador do CDA é:
+\begin{align*}
+\sum \mu(\theta)
+&=\underbrace{(8\cdot0{,}40+0{,}25)}_{3{,}45}
+ +\underbrace{(0{,}25+0{,}50+7\cdot0{,}60)}_{4{,}95}\\
+&=3{,}45+4{,}95=8{,}40.
+\end{align*}
+
+O numerador, incluindo os sinais dos ângulos, é:
+\begin{align*}
+\sum \mu(\theta)\theta
+&=\underbrace{0{,}40(-45-40-35-30-25-20-15-10)
+ +0{,}25(-5)}_{-89{,}25}\\
+&\quad+\underbrace{0{,}25(5)+0{,}50(10)
+ +0{,}60(15+20+25+30+35+40+45)}_{132{,}25}\\
+&=-89{,}25+132{,}25=43{,}00.
+\end{align*}
+
+Substituindo os dois somatórios na fórmula do Centro de Área:
 \[
-\theta_{manual}=\frac{43}{8{,}4}=5{,}1190^\circ.
+\boxed{\theta_{manual}
+=\frac{\sum \mu(\theta)\theta}{\sum \mu(\theta)}
+=\frac{43{,}00}{8{,}40}
+=5{,}1190^\circ}
 \]
 
 O resultado é positivo, portanto a decisão é \textbf{virar para a direita}.
@@ -258,16 +300,40 @@ A Figura~\ref{fig:superficie} apresenta o mapeamento completo entre as duas entr
 O projeto foi preparado para Windows 10 ou 11, em 64 bits, utilizando somente o Scilab 6.1.1 e o sciFLT 0.5. No console do Scilab, devem ser executados os comandos:
 
 \begin{lstlisting}
-cd("C:/Users/ferna/Desktop/01 - Faculdade/AUTOMACAO")
+cd("C:/Users/ferna/Desktop/01 - Faculdade/Faculdade/10 semestre/AUTOMAÇAO")
 exec("fuzzy_robotica.sce", -1)
 \end{lstlisting}
 
 O código-fonte está em:
 \begin{center}
-\small\nolinkurl{C:/Users/ferna/Desktop/01 - Faculdade/AUTOMACAO/fuzzy_robotica.sce}
+\small\ttfamily
+\parbox{0.95\textwidth}{\centering
+C:/Users/ferna/Desktop/01 - Faculdade/Faculdade/10 semestre/\allowbreak
+AUTOMA\c{C}AO/\allowbreak fuzzy\_robotica.sce}
 \end{center}
 
 O relatório, o arquivo do sistema fuzzy, o resultado numérico e os gráficos ficam na mesma pasta do projeto. As imagens são armazenadas na subpasta \texttt{prints}.
+
+\section{Verificação dos itens solicitados}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Conferência da entrega em relação ao enunciado da atividade.}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.39\textwidth}>{\raggedright\arraybackslash}p{0.49\textwidth}}
+\toprule
+\textbf{Exigência} & \textbf{Atendimento} \\
+\midrule
+Cinco fases do cálculo manual & Seções 4.1 a 4.5, com equações, regras, implicação, agregação e CDA. \\
+CDA em passos de $5^\circ$ & Tabela completa de $-45^\circ$ a $45^\circ$ e memorial dos dois somatórios. \\
+Implementação computacional & Código Scilab/sciFLT, sistema salvo em \texttt{.fls} e nove regras. \\
+Teste $d=10$ e $a=-10$ & Print da saída e valor computacional $4{,}828622^\circ$. \\
+Comparação manual/computacional & $5{,}119048^\circ$ contra $4{,}828622^\circ$; diferença de $-0{,}290426^\circ$. \\
+Documentação e GitHub & README completo, código, relatório e pasta \texttt{prints} organizados. \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Conclusão}
 

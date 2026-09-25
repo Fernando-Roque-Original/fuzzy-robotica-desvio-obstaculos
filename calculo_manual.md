@@ -9,15 +9,15 @@ Entradas do teste:
 
 Para a distância `d = 10 cm`:
 
-- μPerto(10) = `1,0`
-- μMédia(10) = `0,0`
-- μLonge(10) = `0,0`
+- μPerto(10) = `1,0`, pois `10` pertence ao patamar `[0, 15]`.
+- μMédia(10) = `0,0`, pois `10 < 15`, início do suporte.
+- μLonge(10) = `0,0`, pois `10 < 60`, início do suporte.
 
 Para a assimetria `a = -10 cm`:
 
-- μNegativa(-10) = `(0 - (-10)) / 25 = 0,4`
-- μZero(-10) = `(-10 - (-25)) / 25 = 0,6`
-- μPositiva(-10) = `0,0`
+- μNegativa(-10) = `(0 - (-10)) / (0 - (-25)) = 10/25 = 0,4`
+- μZero(-10) = `((-10) - (-25)) / (0 - (-25)) = 15/25 = 0,6`
+- μPositiva(-10) = `0,0`, pois `-10 < 0`, início do suporte.
 
 ## Fase 2 - Regras ativadas
 
@@ -66,6 +66,20 @@ As duas saídas truncadas são combinadas ponto a ponto pelo operador máximo:
 | 45 | 0,60 | 27,00 |
 | **Soma** | **8,40** | **43,00** |
 
+### Memorial dos somatórios do CDA
+
+Denominador:
+
+`Σμ = (8×0,40 + 0,25) + (0,25 + 0,50 + 7×0,60)`
+
+`Σμ = 3,45 + 4,95 = 8,40`
+
+Numerador:
+
+`Σμθ = [0,40×(-45-40-35-30-25-20-15-10) + 0,25×(-5)] + [0,25×5 + 0,50×10 + 0,60×(15+20+25+30+35+40+45)]`
+
+`Σμθ = -89,25 + 132,25 = 43,00`
+
 Logo:
 
 `CDA = Σ μ(θ)·θ / Σ μ(θ) = 43 / 8,4 = 5,1190°`
@@ -73,4 +87,3 @@ Logo:
 O ângulo é positivo, portanto a ação é **virar para a direita**.
 
 O sciFLT usa uma discretização mais fina, com 1001 pontos, e por isso pode produzir uma pequena diferença em relação ao cálculo manual de 5 em 5 graus.
-
