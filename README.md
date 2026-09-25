@@ -107,6 +107,8 @@ fuzzy-robotica-desvio-obstaculos/
     ├── 02_assimetria_lateral.png
     ├── 03_angulo_direcao.png
     ├── 04_superficie_controle_3d.png
+    ├── 05_fase1_entradas_anotadas.png
+    ├── 06_fases3_4_implicacao_agregacao.png
     └── resultado_simulacao.png
 ```
 

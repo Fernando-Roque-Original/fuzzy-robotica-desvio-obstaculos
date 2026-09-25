@@ -224,6 +224,89 @@ xtitle("Superficie 3D do Controle Fuzzy", ..
        "Theta (graus)");
 xs2png(f5, pasta_prints + "04_superficie_controle_3d.png");
 
+// Graficos preenchidos da Parte 1 - Fase 1.
+// Mostram os valores crisp e os graus de pertinencia calculados manualmente.
+d_grade = linspace(0, 100, 1001)';
+perto_grade = trapmf(d_grade, [0 0 15 40]);
+media_grade = trimf(d_grade, [15 50 85]);
+longe_grade = trapmf(d_grade, [60 85 100 100]);
+perto_grade(1) = 1;
+longe_grade($) = 1;
+
+a_grade = linspace(-50, 50, 1001)';
+negativa_grade = trapmf(a_grade, [-50 -50 -25 0]);
+zero_grade = trimf(a_grade, [-25 0 25]);
+positiva_grade = trapmf(a_grade, [0 25 50 50]);
+negativa_grade(1) = 1;
+positiva_grade($) = 1;
+
+f6 = scf(6);
+clf();
+f6.figure_size = [1200 520];
+subplot(1, 2, 1);
+plot(d_grade, perto_grade, "b-", "LineWidth", 2);
+plot(d_grade, media_grade, "g-", "LineWidth", 2);
+plot(d_grade, longe_grade, "r-", "LineWidth", 2);
+plot([d d], [0 1.05], "k--", "LineWidth", 2);
+plot(d, mu_perto, "ko", "MarkerSize", 7);
+xgrid();
+gca().data_bounds = [0 -0.05; 100 1.08];
+xtitle("Fase 1: d = 10 cm", "Distancia frontal (cm)", "Grau de pertinencia");
+xstring(17, 0.92, "muPerto = 1,0");
+xstring(17, 0.82, "muMedia = 0,0; muLonge = 0,0");
+
+subplot(1, 2, 2);
+plot(a_grade, negativa_grade, "b-", "LineWidth", 2);
+plot(a_grade, zero_grade, "g-", "LineWidth", 2);
+plot(a_grade, positiva_grade, "r-", "LineWidth", 2);
+plot([a a], [0 1.05], "k--", "LineWidth", 2);
+plot(a, mu_negativa, "bo", "MarkerSize", 7);
+plot(a, mu_zero, "go", "MarkerSize", 7);
+xgrid();
+gca().data_bounds = [-50 -0.05; 50 1.08];
+xtitle("Fase 1: a = -10 cm", "Assimetria lateral (cm)", "Grau de pertinencia");
+xstring(-47, 0.92, "muNegativa = 0,4");
+xstring(2, 0.72, "muZero = 0,6");
+xstring(2, 0.62, "muPositiva = 0,0");
+xs2png(f6, pasta_prints + "05_fase1_entradas_anotadas.png");
+
+// Fases 3 e 4: implicacao de Mamdani e agregacao pelo maximo.
+theta_fino = linspace(-45, 45, 901)';
+esquerda_fina = trapmf(theta_fino, [-45 -45 -20 0]);
+direita_fina = trapmf(theta_fino, [0 20 45 45]);
+esquerda_fina(1) = 1;
+direita_fina($) = 1;
+regra_1_fina = min(forca_regra_1 * ones(theta_fino), esquerda_fina);
+regra_2_fina = min(forca_regra_2 * ones(theta_fino), direita_fina);
+agregada_fina = max([regra_1_fina regra_2_fina], "c");
+
+f7 = scf(7);
+clf();
+f7.figure_size = [1350 520];
+
+subplot(1, 3, 1);
+plot(theta_fino, regra_1_fina, "b-", "LineWidth", 3);
+xgrid();
+gca().data_bounds = [-45 -0.05; 45 0.82];
+xtitle("Fase 3 - Regra 1", "Theta (graus)", "Pertinencia");
+xstring(-40, 0.47, "Virar Esquerda: alfa1 = 0,4");
+
+subplot(1, 3, 2);
+plot(theta_fino, regra_2_fina, "r-", "LineWidth", 3);
+xgrid();
+gca().data_bounds = [-45 -0.05; 45 0.82];
+xtitle("Fase 3 - Regra 2", "Theta (graus)", "Pertinencia");
+xstring(2, 0.67, "Virar Direita: alfa2 = 0,6");
+
+subplot(1, 3, 3);
+plot(theta_fino, agregada_fina, "k-", "LineWidth", 3);
+plot([theta_manual theta_manual], [0 0.72], "m--", "LineWidth", 2);
+xgrid();
+gca().data_bounds = [-45 -0.05; 45 0.82];
+xtitle("Fase 4 - Agregacao (maximo)", "Theta (graus)", "Pertinencia");
+xstring(-42, 0.75, msprintf("CDA = %.4f graus", theta_manual));
+xs2png(f7, pasta_prints + "06_fases3_4_implicacao_agregacao.png");
+
 mprintf("Arquivos salvos em: %s\n", pasta_projeto);
 mprintf("Sistema salvo como fuzzy_robotica.fls\n");
-mprintf("Graficos 2D e superficie 3D salvos na pasta prints.\n");
+mprintf("Graficos das 5 fases, simulacao e superficie 3D salvos em prints.\n");

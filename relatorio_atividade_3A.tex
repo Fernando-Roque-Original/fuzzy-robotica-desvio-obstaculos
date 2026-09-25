@@ -172,6 +172,25 @@ lineares de Negativa e Zero. Usando as equações das retas indicadas no gráfic
 e $\mu_{\text{Positiva}}(-10)=0$, pois a função Positiva só possui suporte
 a partir de $a=0$.
 
+Os seis campos solicitados na atividade ficam, portanto, preenchidos por:
+\[
+\boxed{\mu_{\text{Perto}}(10)=1{,}0}\quad
+\boxed{\mu_{\text{Média}}(10)=0{,}0}\quad
+\boxed{\mu_{\text{Longe}}(10)=0{,}0}
+\]
+\[
+\boxed{\mu_{\text{Negativa}}(-10)=0{,}4}\quad
+\boxed{\mu_{\text{Zero}}(-10)=0{,}6}\quad
+\boxed{\mu_{\text{Positiva}}(-10)=0{,}0}.
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{05_fase1_entradas_anotadas.png}
+  \caption{Fase 1 preenchida: valores crisp marcados e graus de pertinência.}
+  \label{fig:fase1-anotada}
+\end{figure}
+
 \subsection{Fase 2 -- Regras ativadas}
 
 Somente duas regras apresentam antecedente diferente de zero:
@@ -201,6 +220,17 @@ As saídas truncadas são combinadas pelo máximo:
 \min(0{,}6;\mu_{\text{Direita}}(\theta))
 \right).
 \]
+
+A Figura~\ref{fig:fases34} reúne o que deve ser desenhado no gráfico em branco
+das Fases 3 e 4: a contribuição da Regra 1 truncada em $0{,}4$, a contribuição
+da Regra 2 truncada em $0{,}6$ e o contorno agregado obtido pelo máximo.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{06_fases3_4_implicacao_agregacao.png}
+  \caption{Fases 3 e 4 preenchidas: implicação Mamdani e agregação.}
+  \label{fig:fases34}
+\end{figure}
 
 \subsection{Fase 5 -- Defuzzificação}
 
