@@ -306,6 +306,31 @@ Para $d=10$ cm e $a=-10$ cm, o software produziu:
   \item diferença em relação ao cálculo manual: $-0{,}290426^\circ$.
 \end{itemize}
 
+\subsection*{Comparação entre o valor calculado e o valor simulado}
+
+\begin{table}[H]
+  \centering
+  \caption{Comparação final exigida entre cálculo manual e simulação.}
+  \renewcommand{\arraystretch}{1.3}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{0.29\textwidth}
+                  >{\centering\arraybackslash}p{0.18\textwidth}
+                  >{\centering\arraybackslash}p{0.17\textwidth}
+                  >{\centering\arraybackslash}p{0.19\textwidth}}
+    \toprule
+    \textbf{Resultado} & \textbf{Discretização} & \textbf{Ângulo $\theta$} & \textbf{Ação} \\
+    \midrule
+    Calculado manualmente pelo CDA & Passos de $5^\circ$ & $5{,}119048^\circ$ & Virar à direita \\
+    Simulado no Scilab/sciFLT & 1001 pontos & $4{,}828622^\circ$ & Virar à direita \\
+    Diferença (simulado $-$ manual) & -- & $-0{,}290426^\circ$ & Mesma decisão \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Portanto, o valor calculado manualmente é $5{,}119048^\circ$ e o valor
+simulado é $4{,}828622^\circ$. Os dois resultados são positivos e levam à
+mesma ação de controle: \textbf{virar para a direita}.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{resultado_simulacao.png}
